@@ -1,5 +1,6 @@
 require "openssl"
 require "openid_redis_store"
+require "omniauth/strategies/maishoudang"
 
 # if you need to test this and are having ssl issues see:
 #  http://stackoverflow.com/questions/6756460/openssl-error-using-omniauth-specified-ssl-path-but-didnt-work

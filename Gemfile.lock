@@ -4,7 +4,7 @@ PATH
     rails_multisite (0.0.1)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     actionmailer (4.1.4)
       actionpack (= 4.1.4)
@@ -176,7 +176,6 @@ GEM
       metaclass (~> 0.0.1)
     mock_redis (0.11.0)
     moneta (0.7.20)
-    msgpack (0.5.8)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -276,10 +275,6 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
-    rbtrace (0.4.3)
-      ffi (>= 1.0.6)
-      msgpack (>= 0.4.3)
-      trollop (>= 1.16.2)
     redcarpet (3.1.1)
     redis (3.0.7)
     redis-namespace (1.4.1)
@@ -376,7 +371,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    trollop (2.0)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
     uglifier (2.5.0)
@@ -456,7 +450,6 @@ DEPENDENCIES
   rake
   rb-fsevent
   rb-inotify (~> 0.9)
-  rbtrace
   redcarpet
   redis
   rest-client
