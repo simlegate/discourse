@@ -173,10 +173,10 @@ login:
     client: true
     default: false
   enable_local_logins:
-    client: true
+    client: false
     default: true
   allow_new_registrations:
-    client: true
+    client: false
     default: true
   # The default value of enable_google_logins changed from true to false.
   # See db/migrate/20140521220115_google_openid_default_has_changed.rb
@@ -207,6 +207,15 @@ login:
     default: ''
     regex: "^\\d+$"
   facebook_app_secret:
+    default: ''
+    regex: "^[a-f0-9]*$"
+  enable_maishoudang_logins:
+    client: true
+    default: false
+  maishoudang_app_id:
+    default: ''
+    regex: "^\\d+$"
+  maishoudang_app_secret:
     default: ''
     regex: "^[a-f0-9]*$"
   enable_github_logins:

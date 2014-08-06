@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 module ::Kernel
   def rails_master?
@@ -206,7 +206,7 @@ gem 'rack-mini-profiler', require: false
 
 gem 'unicorn', require: false
 gem 'puma', require: false
-gem 'rbtrace', require: false, platform: :mri
+# gem 'rbtrace', require: false, platform: :mri
 
 # required for feed importing and embedding
 #
