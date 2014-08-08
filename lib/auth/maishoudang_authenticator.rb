@@ -9,40 +9,30 @@ class Auth::MaishoudangAuthenticator < Auth::Authenticator
 
     data = auth_token[:info]
 
-    result.username = screen_name = data["nickname"]
+    result.username = username = data["username"]
     result.email = email = data["email"]
 
-    github_user_id = auth_token["uid"]
+    maishoudang_user_id = auth_token["uid"]
 
     result.extra_data = {
-      github_user_id: github_user_id,
-      github_screen_name: screen_name,
+      maishoudang_user_id: maishoudang_user_id,
+      maishoudang_user_name: username,
     }
 
-    user_info = GithubUserInfo.find_by(github_user_id: github_user_id)
+    # user_info = GithubUserInfo.find_by(github_user_id: github_user_id)
+    user_info = MaishoudangUserInfo.find_by(maishoudang_user_id: maishoudang_user_id)
 
-    if user_info
-      user = user_info.user
-    elsif user = User.find_by_email(email)
-      user_info = GithubUserInfo.create(
-          user_id: user.id,
-          screen_name: screen_name,
-          github_user_id: github_user_id
-      )
-    end
-
-    result.user = user
-    result.email_valid = false
+    result.user = user_info.try(:user)
 
     result
   end
 
   def after_create_account(user, auth)
     data = auth[:extra_data]
-    GithubUserInfo.create(
+    MaishoudangUserInfo.create(
       user_id: user.id,
-      screen_name: data[:github_screen_name],
-      github_user_id: data[:github_user_id]
+      username: data[:username],
+      maishoudang_user_id: data[:maishoudang_user_id]
     )
   end
 
@@ -54,6 +44,7 @@ class Auth::MaishoudangAuthenticator < Auth::Authenticator
               strategy.options[:client_id] = SiteSetting.maishoudang_app_id
               strategy.options[:client_secret] = SiteSetting.maishoudang_app_secret
            },
-           :scope => "user:email"
+           :scope => "user:email",
+           :provider_ignores_state => true
   end
 end

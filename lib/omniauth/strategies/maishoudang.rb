@@ -1,26 +1,31 @@
 require 'omniauth-oauth2'
- 
-class OmniAuth::Strategies::Maishoudang < OmniAuth::Strategies::OAuth2
-  option :name, "maishoudang" 
-  option :client_options, site: 'http://maishoudang.com'
 
-  uid { raw_info['id'] }
+module OmniAuth
+  module Strategies
+    class Maishoudang < OmniAuth::Strategies::OAuth2
+      option :name, "maishoudang" 
+      option :client_options, { site: 'http://localhost:4000' }
 
-  info do
-    {
-      :username => raw_info['username'],
-      :name => raw_info['name'],
-      :email => raw_info['email']
-    }
-  end
+      uid { raw_info['id'] }
 
-  extra do
-    {
-      'raw_info' => raw_info
-    }
-  end
+      info do
+        {
+          :username => raw_info['username'],
+          :username_pinyin => raw_info['username_pinyin'],
+          :email => raw_info['email']
+        }
+      end
 
-  def raw_info
-    @raw_info ||= access_token.get('/oauth/me.json').parsed
+      extra do
+        {
+          'raw_info' => raw_info
+        }
+      end
+
+      def raw_info
+        @raw_info ||= access_token.get('/oauth/me.json').parsed
+      end
+    end
   end
 end
+
