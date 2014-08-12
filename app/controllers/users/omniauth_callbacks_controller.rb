@@ -32,6 +32,7 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def complete
     auth = request.env["omniauth.auth"]
+    p auth
     auth[:session] = session
 
     authenticator = self.class.find_authenticator(params[:provider])
@@ -46,6 +47,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     else
       session[:authentication] = @data.session_data
     end
+    p @data
 
     respond_to do |format|
       format.html

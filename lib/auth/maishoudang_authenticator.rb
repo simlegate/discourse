@@ -19,13 +19,24 @@ class Auth::MaishoudangAuthenticator < Auth::Authenticator
       maishoudang_user_name: username,
     }
 
-    # user_info = GithubUserInfo.find_by(github_user_id: github_user_id)
     user_info = MaishoudangUserInfo.find_by(maishoudang_user_id: maishoudang_user_id)
 
-    result.user = user_info.try(:user)
+    if user_info
+      user = user_info.user
+    elsif user = User.find_by_email(email)
+      user_info = MaishoudangUserInfo.create(
+        user_id: user.id,
+        username: username,
+        maishoudang_user_id: maishoudang_user_id 
+      )
+    end
+
+    result.user = user
+    result.email_valid = false
 
     result
   end
+
 
   def after_create_account(user, auth)
     data = auth[:extra_data]
@@ -44,7 +55,7 @@ class Auth::MaishoudangAuthenticator < Auth::Authenticator
               strategy.options[:client_id] = SiteSetting.maishoudang_app_id
               strategy.options[:client_secret] = SiteSetting.maishoudang_app_secret
            },
-           :scope => "user:email",
+           # :scope => "user:email",
            :provider_ignores_state => true
   end
 end
