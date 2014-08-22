@@ -34,6 +34,8 @@ var ApplicationRoute = Em.Route.extend({
           this.controllerFor('login').resetForm();
         }
       }
+
+      // window.location = Discourse.getURL("/auth/maishoudang")
     },
 
     showCreateAccount: function() {

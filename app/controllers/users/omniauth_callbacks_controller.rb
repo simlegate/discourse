@@ -32,7 +32,6 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def complete
     auth = request.env["omniauth.auth"]
-    p auth
     auth[:session] = session
 
     authenticator = self.class.find_authenticator(params[:provider])
@@ -45,9 +44,14 @@ class Users::OmniauthCallbacksController < ApplicationController
     elsif SiteSetting.invite_only?
       @data.requires_invite = true
     else
-      session[:authentication] = @data.session_data
+      # session[:authentication] = @data.session_data
+      user = User.create(
+        name: @data.session_data[:name],
+        email: @data.session_data[:email],
+        username: @data.session_data[:username],
+        active: true) if user.nil?
+      user_found(user)
     end
-    p @data
 
     respond_to do |format|
       format.html

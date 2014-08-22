@@ -4,7 +4,7 @@ module OmniAuth
   module Strategies
     class Maishoudang < OmniAuth::Strategies::OAuth2
       option :name, "maishoudang" 
-      option :client_options, { site: 'http://localhost:4000' }
+      option :client_options, { site: 'http://lvh.me:3000' }
 
       uid { raw_info['id'] }
 

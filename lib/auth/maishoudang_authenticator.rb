@@ -55,7 +55,7 @@ class Auth::MaishoudangAuthenticator < Auth::Authenticator
               strategy.options[:client_id] = SiteSetting.maishoudang_app_id
               strategy.options[:client_secret] = SiteSetting.maishoudang_app_secret
            },
-           # :scope => "user:email",
+           # :scope => "user",
            :provider_ignores_state => true
   end
 end

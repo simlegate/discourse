@@ -156,14 +156,16 @@ export default Discourse.Controller.extend(Discourse.ModalFunctionality, {
       return;
     }
 
-    var createAccountController = this.get('controllers.createAccount');
-    createAccountController.setProperties({
-      accountEmail: options.email,
-      accountUsername: options.username,
-      accountName: options.name,
-      authOptions: Em.Object.create(options)
-    });
-    this.send('showCreateAccount');
+    // var createAccountController = this.get('controllers.createAccount');
+    // createAccountController.setProperties({
+    //   accountEmail: options.email,
+    //   accountUsername: options.username,
+    //   accountName: options.name,
+    //   authOptions: Em.Object.create(options)
+    // });
+    // this.send('showCreateAccount');
+
+    window.location.reload();
   }
 
 });

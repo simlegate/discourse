@@ -18,6 +18,10 @@ class Auth::DefaultCurrentUserProvider
   def current_user
     return @env[CURRENT_USER_KEY] if @env.key?(CURRENT_USER_KEY)
 
+    if fetch_user_from_maishoudang
+      return @env[CURRENT_USER_KEY] = current_user = fetch_user_from_maishoudang
+    end
+
     request = @request
 
     auth_token = request.cookies[TOKEN_COOKIE]
@@ -104,6 +108,19 @@ class Auth::DefaultCurrentUserProvider
         nil
       end
     end
+  end
+
+  def fetch_user_from_maishoudang
+    @request.session[:init] = true unless @request.session[:init].eql?(true)
+
+    user_info = @request.session['devise.maishoudang.user_info'] || return
+
+    user = User.find_by(email: user_info[:email])
+    unless user
+      user = User.create!(email: user_info[:email], username: user_info[:username], password: SecureRandom.hex(8))
+    end
+
+    user
   end
 
 end

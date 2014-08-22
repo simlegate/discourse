@@ -13,6 +13,14 @@ class ApplicationController < ActionController::Base
   include CanonicalURL::ControllerExtensions
   include JsonError
 
+  before_filter :print_session
+
+  def print_session
+    p '====================================='
+    p session.to_hash
+    p '====================================='
+  end
+
   serialization_scope :guardian
 
   protect_from_forgery
@@ -361,5 +369,4 @@ class ApplicationController < ActionController::Base
         params[key].split(delimiter).map(&:to_i)
       end
     end
-
 end
