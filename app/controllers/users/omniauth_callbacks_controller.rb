@@ -39,24 +39,22 @@ class Users::OmniauthCallbacksController < ApplicationController
     @data = authenticator.after_authenticate(auth)
     @data.authenticator_name = authenticator.name
 
+
     if @data.user
       user_found(@data.user)
     elsif SiteSetting.invite_only?
       @data.requires_invite = true
     else
-      # session[:authentication] = @data.session_data
-      user = User.create(
-        name: @data.session_data[:name],
-        email: @data.session_data[:email],
-        username: @data.session_data[:username],
-        active: true) if user.nil?
-      user_found(user)
+      session[:authentication] = @data.session_data
     end
 
-    respond_to do |format|
-      format.html
-      format.json { render json: @data.to_client_hash }
-    end
+    
+    redirect_to categories_index_path
+
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: @data.to_client_hash }
+    # end
   end
 
   def failure

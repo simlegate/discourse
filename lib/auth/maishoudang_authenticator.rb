@@ -5,6 +5,7 @@ class Auth::MaishoudangAuthenticator < Auth::Authenticator
   end
 
   def after_authenticate(auth_token)
+    
     result = Auth::Result.new
 
     data = auth_token[:info]

@@ -23,19 +23,19 @@ var ApplicationRoute = Em.Route.extend({
     },
 
     showLogin: function() {
-      if (Discourse.get("isReadOnly")) {
-        bootbox.alert(I18n.t("read_only_mode.login_disabled"));
-      } else {
-        if(Discourse.SiteSettings.enable_sso) {
-          var returnPath = encodeURIComponent(window.location.pathname);
-          window.location = Discourse.getURL('/session/sso?return_path=' + returnPath);
-        } else {
-          Discourse.Route.showModal(this, 'login');
-          this.controllerFor('login').resetForm();
-        }
-      }
+      // if (Discourse.get("isReadOnly")) {
+      //   bootbox.alert(I18n.t("read_only_mode.login_disabled"));
+      // } else {
+      //   if(Discourse.SiteSettings.enable_sso) {
+      //     var returnPath = encodeURIComponent(window.location.pathname);
+      //     window.location = Discourse.getURL('/session/sso?return_path=' + returnPath);
+      //   } else {
+      //     Discourse.Route.showModal(this, 'login');
+      //     this.controllerFor('login').resetForm();
+      //   }
+      // }
 
-      // window.location = Discourse.getURL("/auth/maishoudang")
+       window.location = Discourse.getURL("/auth/maishoudang")
     },
 
     showCreateAccount: function() {

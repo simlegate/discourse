@@ -16,15 +16,15 @@ class Auth::Result
   end
 
   def to_client_hash
-    if requires_invite
-      { requires_invite: true }
-    elsif user
-      {
-        authenticated: !!authenticated,
-        awaiting_activation: !!awaiting_activation,
-        awaiting_approval: !!awaiting_approval
-      }
-    else
+    # if requires_invite
+    #   { requires_invite: true }
+    # elsif user
+    #   {
+    #     authenticated: !!authenticated,
+    #     awaiting_activation: !!awaiting_activation,
+    #     awaiting_approval: !!awaiting_approval
+    #   }
+    # else
       {
         email: email,
         name:  User.suggest_name(name || username || email),
@@ -33,6 +33,6 @@ class Auth::Result
         auth_provider: authenticator_name.capitalize,
         email_valid: !!email_valid
       }
-    end
+    # end
   end
 end

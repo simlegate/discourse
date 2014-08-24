@@ -45,7 +45,7 @@ required:
 
 basic:
   default_locale:
-    default: 'en'
+    default: 'zh_CN'
     enum: 'LocaleSiteSetting'
     refresh: true
   allow_user_locale:
@@ -164,7 +164,7 @@ basic:
 
 login:
   invite_only:
-    client: true
+    client: false
     default: false
   login_required:
     client: true
